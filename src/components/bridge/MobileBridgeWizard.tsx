@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ArrowRight, CheckCircle, ChevronLeft } from 'lucide-react';
+import BridgeFeeCard from '@/components/bridge/BridgeFeeCard';
 
 type Step = 'source' | 'asset' | 'target' | 'review';
 
@@ -296,16 +297,15 @@ export default function MobileBridgeWizard() {
                     </div>
                   </div>
 
+                  <BridgeFeeCard
+                    sourceNetwork={sourceNetwork}
+                    targetNetwork={targetNetwork}
+                    assetCode={asset ? asset.toUpperCase() : null}
+                    amount={amount}
+                  />
+
                   {/* Summary details */}
                   <div className="space-y-3 pt-2">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400">Bridge Fee</span>
-                      <span className="font-medium">~0.1 {asset?.toUpperCase()}</span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-gray-500 dark:text-gray-400">Estimated Time</span>
-                      <span className="font-medium">2-5 minutes</span>
-                    </div>
                     <div className="flex justify-between text-sm pt-3 border-t border-gray-100 dark:border-gray-700">
                       <span className="font-semibold">You will receive</span>
                       <span className="font-bold text-green-600 dark:text-green-400">

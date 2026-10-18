@@ -66,3 +66,26 @@ export const FAILURE_REASON_LABELS: Record<BridgeFailureReason, string> = {
   threshold_not_met:
     "Validator signatures fell short of the required quorum threshold.",
 };
+
+/** Inputs that determine a relayer fee / delivery-time quote. */
+export interface BridgeFeeQuoteRequest {
+  sourceNetwork: string;
+  targetNetwork: string;
+  assetCode: string;
+  amount: number;
+}
+
+/** Relayer quote for a single bridge route and amount. */
+export interface BridgeFeeQuote {
+  /** Gas paid on the source network, denominated in `sourceGasToken`. */
+  sourceGasFee: number;
+  sourceGasToken: string;
+  /** Relayer service fee, denominated in `relayerFeeToken` (the bridged asset). */
+  relayerServiceFee: number;
+  relayerFeeToken: string;
+  /** Estimated end-to-end delivery window, in seconds. */
+  estimatedTimeMinSeconds: number;
+  estimatedTimeMaxSeconds: number;
+  /** ISO-8601 timestamp the quote was produced */
+  quotedAt: string;
+}
